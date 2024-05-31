@@ -1,0 +1,21 @@
+//Initialisierung
+int pin[] = {4, 5, 6, 7, 8, 9, 10, 11, 12, 13}; // Initialisierung Pin-Array 5 LED
+int analogPin = A0; // Initialisierung analoger Eingang für Spannungsteiler
+
+//Setup
+void setup() {
+for(int i = 0; i < 10; i++) //Array Index inkrementell erhöhen
+pinMode(pin[i], OUTPUT); // Alle Pins sind Ausgänge
+}
+
+// Funktion zum Ansteuern der LEDs
+void steuereLEDs(int wert){
+int bargraphWert = map(wert, 0, 1023, 0, 9); //Umrechnung Helligkeitswert in ganze Zahl und Umwandlung Eingang in Ausgang
+for(int i = 0; i < 10; i++)
+digitalWrite(pin[i], (bargraphWert >= i)?HIGH:LOW); //Weitergabe des Helligkeitswerts
+}
+
+//Programm
+void loop() {
+steuereLEDs(analogRead(analogPin)); //Aufruf Unterprogramm mit Funktion für Helligkeitswert Steuerung
+}
